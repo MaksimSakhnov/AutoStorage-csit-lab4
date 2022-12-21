@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Study\\c#_labs\\project\\WinFormsApp2\\WinFormsApp2\\WinFormsApp2.csproj": {}
+    "D:\\Study\\c#_labs\\project\\WinFormsApp2\\AutoStorage-csit-lab4\\WinFormsApp2\\WinFormsApp2.csproj": {}
   },
   "projects": {
-    "D:\\Study\\c#_labs\\project\\WinFormsApp2\\WinFormsApp2\\WinFormsApp2.csproj": {
+    "D:\\Study\\c#_labs\\project\\WinFormsApp2\\AutoStorage-csit-lab4\\WinFormsApp2\\WinFormsApp2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Study\\c#_labs\\project\\WinFormsApp2\\WinFormsApp2\\WinFormsApp2.csproj",
+        "projectUniqueName": "D:\\Study\\c#_labs\\project\\WinFormsApp2\\AutoStorage-csit-lab4\\WinFormsApp2\\WinFormsApp2.csproj",
         "projectName": "WinFormsApp2",
-        "projectPath": "D:\\Study\\c#_labs\\project\\WinFormsApp2\\WinFormsApp2\\WinFormsApp2.csproj",
+        "projectPath": "D:\\Study\\c#_labs\\project\\WinFormsApp2\\AutoStorage-csit-lab4\\WinFormsApp2\\WinFormsApp2.csproj",
         "packagesPath": "C:\\Users\\maksi\\.nuget\\packages\\",
-        "outputPath": "D:\\Study\\c#_labs\\project\\WinFormsApp2\\WinFormsApp2\\obj\\",
+        "outputPath": "D:\\Study\\c#_labs\\project\\WinFormsApp2\\AutoStorage-csit-lab4\\WinFormsApp2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\maksi\\AppData\\Roaming\\NuGet\\NuGet.Config",

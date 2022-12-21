@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp2
 {
+    /*
+     * 1)неккоректно отображаются дни в приемке, нужно КОГДА-НИБУДЬ добавить поле день в запрос
+        2) Склад отсылает запросы, когда количество конкретного продукта = 0
+
+     */
+
     internal class Store
     {
 
@@ -16,19 +22,20 @@ namespace WinFormsApp2
         public DataTable storageInfoTable = new DataTable();
         public DataTable shopsInfoTable = new DataTable();
         public DataTable priemkaInfoTable = new DataTable();
+        public DataTable stats = new DataTable();
 
         public int day = 0;
 
         //очередь из запросов магазинов
         public Queue<Request> requestQueue = new Queue<Request>();
-        //
+        //список всех запросов
         public ObservableCollection<Request> requestList = new ObservableCollection<Request>();
-        //история из запросов магазинов
-        public List<Request> requestHistory = new List<Request>();
         //список магазинов
         public List<Shop> shopList = new List<Shop>();
         //список продуктов склада
         public ObservableCollection<Product> productsList = new ObservableCollection<Product>();
+        //список статистик за каждый день
+        public ObservableCollection<Statistics> statistics = new ObservableCollection<Statistics>();
 
         //поставщик
         public Factory factory = new Factory();
@@ -41,10 +48,24 @@ namespace WinFormsApp2
             this.shopList = init.getShopsOnLoad();
             this.shopsInfoTableInit();
             this.priemkaInfoTableInit();
+            this.statsInfoTableInit();
             this.requestList.CollectionChanged += onRequestListChanged;
             this.productsList.CollectionChanged += onProductsListChanged;
             this.factory.requestsList.CollectionChanged += onFactoryListChanged;
 
+            this.statistics.Add(new Statistics(this.day));
+
+        }
+
+        //иницилизация таблиц статистики
+        private void statsInfoTableInit()
+        {
+            this.stats.Columns.Add("День", typeof(int));
+            this.stats.Columns.Add("Заработано", typeof(int));
+            this.stats.Columns.Add("Потрачено", typeof(int));
+            this.stats.Columns.Add("Прибыль", typeof(int));
+            this.stats.Columns.Add("Продуктов продано", typeof(int));
+            this.stats.Columns.Add("Потери", typeof(int));
         }
 
         //иницилизация таблиц приемки 
@@ -54,6 +75,29 @@ namespace WinFormsApp2
             this.priemkaInfoTable.Columns.Add("Количество", typeof(int));
             this.priemkaInfoTable.Columns.Add("Дней до поставки", typeof(int));
         }
+
+        //обработка изменения листа с статистикой 
+        public void onStatsListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.onUpdStatsList();
+        }
+
+        public void onUpdStatsList()
+        {
+            this.stats.Rows.Clear();
+            for (int i = 0; i < this.statistics.Count; i++)
+            {
+                this.stats.Rows.Add(
+                    this.statistics[i].Day,
+                    this.statistics[i].Earn,
+                    this.statistics[i].Spend,
+                    this.statistics[i].Profit(),
+                    this.statistics[i].ItemsSold,
+                    this.statistics[i].Looses
+                    );
+            }
+        }
+
 
         //обработка изменения листа с запросами на фабрику
         public void onFactoryListChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -90,18 +134,7 @@ namespace WinFormsApp2
         //обработка события изменения списка продуктов
         public void onProductsListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            storageInfoTable.Rows.Clear();
-            for (int i = 0; i < this.productsList.Count; i++)
-            {
-                this.storageInfoTable.Rows.Add(
-                    this.productsList[i].getName(),
-                    this.productsList[i].getCount(),
-                    this.productsList[i].getCountInPack(),
-                    this.productsList[i].getWeight(),
-                    this.productsList[i].getExpirationDateInDays(),
-                    this.productsList[i].getPrice()
-                    );
-            }
+            this.onUpdProductList();
         }
 
         //перерисовка при обновлении элементов списка продуктов
@@ -124,19 +157,7 @@ namespace WinFormsApp2
         //обработка события изменения списка запросов
         public void onRequestListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            shopsInfoTable.Rows.Clear();
-
-
-            for (int i = 0; i < requestList.Count; i++)
-            {
-                shopsInfoTable.Rows.Add(
-                    this.day,
-                    this.requestList[i].shopName,
-                this.requestList[i].productName,
-                this.requestList[i].col,
-                this.requestList[i].getIsWaiting()
-                );
-            }
+            this.onUpdRequestList();
 
         }
 
@@ -219,7 +240,8 @@ namespace WinFormsApp2
                     {
                         if (this.requestList[i].shopName == shopList[j].Name)
                         {
-                            shopList[j].getProducts(temp.productName, temp.getFromStorage);
+                            
+                            this.shopList[j].getProducts(temp.productName, temp.getFromStorage);
                         }
                     }
                     this.requestList[i].requestDone();
@@ -243,22 +265,42 @@ namespace WinFormsApp2
                         int tempCol = temp.col;
                         int onPack = productsList[j].getCountInPack();
                         int packs = productsList[j].getCount();
+                        int price = productsList[j].getPrice();
                         if (packs != 0)
                         {
                             if (tempCol % onPack == 0)
                             {
                                 int col = tempCol / onPack;
-                                productsList[j].sell(col);
+
+
+                                
+
+                                int earn = productsList[j].sell(col);
                                 temp.setGetFromStorage(col * onPack);
                                 this.RequestDone(temp);
+
+                                this.statistics[this.day].addEarn(earn);
+                                this.statistics[this.day].addItemsSold(col * onPack);
+                                this.statistics[this.day].addLooses(productsList[j].losses(col));
                             }
                             else
                             {
                                 int col = tempCol / onPack + 1;
-                                productsList[j].sell(col);
+                                int earn = productsList[j].sell(col);
+
+
+
+
                                 temp.setGetFromStorage(col * onPack);
                                 this.RequestDone(temp);
+
+                                this.statistics[this.day].addEarn(earn);
+                                this.statistics[this.day].addItemsSold(col);
+                                this.statistics[this.day].addLooses(productsList[j].losses(col));
                             }
+
+                            
+
                             requestQueue.Dequeue();
                             i--;
                             break;
@@ -288,6 +330,8 @@ namespace WinFormsApp2
                 {
                     int count = random.Next(10, 20);
                     RequestToFactory req = new RequestToFactory(productsList[i].getName(), count);
+                    //добавляем в статистику затраты на закупку товара
+                    this.statistics[this.day].addSpend(productsList[i].countExpenses(count));
                     this.factory.getRequest(req);
                 }
             }
@@ -312,9 +356,12 @@ namespace WinFormsApp2
             
         }
 
+        //Следующий день
         public void onNextDayClick()
         {
-            for(int i =0; i < this.productsList.Count; i++)
+            this.onUpdStatsList();
+
+            for (int i =0; i < this.productsList.Count; i++)
             {
                 this.productsList[i].checkExpirationDateInDays();
                 this.productsList[i].onDayOut();
@@ -331,10 +378,11 @@ namespace WinFormsApp2
             this.onUpdFactoryList();
 
             this.day++;
+            this.statistics.Add(new Statistics(this.day));
         }
 
 
-        public void test()
+        /*public void test()
         {
             Random random = new Random();
             for (int i = 0; i < this.productsList.Count; i++)
@@ -346,7 +394,7 @@ namespace WinFormsApp2
                     this.factory.getRequest(req);
                 }
             }
-        }
+        }*/
     }
 
 

@@ -10,11 +10,13 @@ namespace WinFormsApp2
     //
     internal class Request
     {
+        //дни запроса неккоректно отображаются
         private string _shopName;
         private string _productName;
         private int _col;
         private bool _isWaiting;
         private int _getFromStorage;
+        
         public Request(string shopName, string productName, int col)
         {
             this._shopName = shopName;

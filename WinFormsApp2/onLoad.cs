@@ -56,7 +56,8 @@ namespace WinFormsApp2
                     double weight = Convert.ToDouble(Convert.ToInt32(rand.NextDouble() * 10)) / 10;
                     int experationInDays = rand.Next(5, 15);
                     int price = rand.Next(50, 200);
-                    Product temp = new Product(name, count, countInPack, weight, experationInDays, price);
+                    int pprice = rand.Next(10, price-20);
+                    Product temp = new Product(name, count, countInPack, weight, experationInDays, price, pprice);
                     this.itemsList.Add(name);
                     this.products.Add(temp);
                     flag = true;

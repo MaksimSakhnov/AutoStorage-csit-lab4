@@ -16,12 +16,13 @@ namespace WinFormsApp2
         private int _expirationDateInDays;
         private int _expirationDateInDaysStatic;
         private int _price;
-        
+        private int _purchasePrice;
+
         private int _priceWithDiscount;
         bool DiscountFlag;
 
         //конструктор для продукта, который будет использоваться на складе
-        public Product(string name, int count, int count_in_pack, double weight, int expirationDateInDays, int price)
+        public Product(string name, int count, int count_in_pack, double weight, int expirationDateInDays, int price, int purchasePrice)
         {
             _name = name;
             _count = count;
@@ -32,6 +33,7 @@ namespace WinFormsApp2
             _price = price;
             _priceWithDiscount = price;
             DiscountFlag = false;
+            _purchasePrice = purchasePrice;
 
         }
 
@@ -104,18 +106,6 @@ namespace WinFormsApp2
             return DiscountFlag;
         }
 
-        public void getInfo()
-        {
-            
-            Console.WriteLine(
-                "Название: " + _name 
-                + "\nКоличество в оптовой упаковке: " + _count 
-                + "\nВес: " + _weight +
-                "\nДней до окончания срока годности: " + _expirationDateInDays 
-                + "\nЦена за упаковку: " + _priceWithDiscount 
-                + "\nСкидка: " + DiscountFlag
-                ) ;
-        }
 
         //проверяем срок годности
         public void checkExpirationDateInDays()
@@ -135,6 +125,11 @@ namespace WinFormsApp2
             this._priceWithDiscount = _price;
         }
 
+        public int losses(int sellCount)
+        {
+            return (sellCount * _price - sellCount * _priceWithDiscount);
+        }
+
         public int sell(int sellCount)
         {
             if(_count < sellCount)
@@ -149,6 +144,11 @@ namespace WinFormsApp2
                 _count -= sellCount;
                 return (sellCount * _price);
             }
+        }
+
+        public int countExpenses(int col)
+        {
+            return (this._purchasePrice * col);
         }
 
 

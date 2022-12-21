@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.StatisticsButton = new System.Windows.Forms.Button();
             this.storage_btn = new System.Windows.Forms.Button();
             this.otgruzka_btn = new System.Windows.Forms.Button();
             this.priemka_btn = new System.Windows.Forms.Button();
+            this.StatisticsData = new System.Windows.Forms.DataGridView();
             this.PriemkaData = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -43,11 +45,11 @@
             this.OtgruzkaData = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.StorageInfo = new System.Windows.Forms.DataGridView();
-            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StatisticsData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriemkaData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OtgruzkaData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StorageInfo)).BeginInit();
@@ -61,13 +63,14 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.StatisticsButton);
             this.splitContainer1.Panel1.Controls.Add(this.storage_btn);
             this.splitContainer1.Panel1.Controls.Add(this.otgruzka_btn);
             this.splitContainer1.Panel1.Controls.Add(this.priemka_btn);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.button6);
+            this.splitContainer1.Panel2.Controls.Add(this.StatisticsData);
             this.splitContainer1.Panel2.Controls.Add(this.PriemkaData);
             this.splitContainer1.Panel2.Controls.Add(this.button5);
             this.splitContainer1.Panel2.Controls.Add(this.button4);
@@ -82,6 +85,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(1064, 681);
             this.splitContainer1.SplitterDistance = 162;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // StatisticsButton
+            // 
+            this.StatisticsButton.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.StatisticsButton.Location = new System.Drawing.Point(12, 123);
+            this.StatisticsButton.Name = "StatisticsButton";
+            this.StatisticsButton.Size = new System.Drawing.Size(135, 31);
+            this.StatisticsButton.TabIndex = 3;
+            this.StatisticsButton.Text = "Статистика";
+            this.StatisticsButton.UseVisualStyleBackColor = true;
+            this.StatisticsButton.Click += new System.EventHandler(this.StatisticsButton_Click);
             // 
             // storage_btn
             // 
@@ -115,6 +129,17 @@
             this.priemka_btn.Text = "Приемка";
             this.priemka_btn.UseVisualStyleBackColor = true;
             this.priemka_btn.Click += new System.EventHandler(this.priemka_btn_Click);
+            // 
+            // StatisticsData
+            // 
+            this.StatisticsData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.StatisticsData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.StatisticsData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.StatisticsData.Location = new System.Drawing.Point(25, 35);
+            this.StatisticsData.Name = "StatisticsData";
+            this.StatisticsData.RowTemplate.Height = 25;
+            this.StatisticsData.Size = new System.Drawing.Size(802, 426);
+            this.StatisticsData.TabIndex = 12;
             // 
             // PriemkaData
             // 
@@ -227,16 +252,6 @@
             this.StorageInfo.Size = new System.Drawing.Size(802, 426);
             this.StorageInfo.TabIndex = 0;
             // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(138, 583);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(91, 37);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
             // StorageWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -251,6 +266,7 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.StatisticsData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriemkaData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OtgruzkaData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StorageInfo)).EndInit();
@@ -275,6 +291,7 @@
         private Button button3;
         private Button button5;
         private DataGridView PriemkaData;
-        private Button button6;
+        private Button StatisticsButton;
+        private DataGridView StatisticsData;
     }
 }
