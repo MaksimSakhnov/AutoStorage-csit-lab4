@@ -32,3 +32,4 @@ D:\Study\c#_labs\project\WinFormsApp2\AutoStorage-csit-lab4\WinFormsApp2\obj\Deb
 D:\Study\c#_labs\project\WinFormsApp2\AutoStorage-csit-lab4\WinFormsApp2\obj\Debug\net6.0-windows\WinFormsApp2.pdb
 D:\Study\c#_labs\project\WinFormsApp2\AutoStorage-csit-lab4\WinFormsApp2\obj\Debug\net6.0-windows\WinFormsApp2.genruntimeconfig.cache
 D:\Study\c#_labs\project\WinFormsApp2\AutoStorage-csit-lab4\WinFormsApp2\obj\Debug\net6.0-windows\ref\WinFormsApp2.dll
+D:\Study\c#_labs\project\WinFormsApp2\AutoStorage-csit-lab4\WinFormsApp2\obj\Debug\net6.0-windows\WinFormsApp2.Properties.Resources.resources

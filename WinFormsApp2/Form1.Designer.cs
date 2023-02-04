@@ -28,11 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StorageWindow));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.modelButton = new System.Windows.Forms.Button();
             this.StatisticsButton = new System.Windows.Forms.Button();
             this.storage_btn = new System.Windows.Forms.Button();
             this.otgruzka_btn = new System.Windows.Forms.Button();
             this.priemka_btn = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.loaderBox = new System.Windows.Forms.PictureBox();
+            this.stageLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.StatisticsData = new System.Windows.Forms.DataGridView();
             this.PriemkaData = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
@@ -49,6 +57,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loaderBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatisticsData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriemkaData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OtgruzkaData)).BeginInit();
@@ -63,6 +72,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.modelButton);
             this.splitContainer1.Panel1.Controls.Add(this.StatisticsButton);
             this.splitContainer1.Panel1.Controls.Add(this.storage_btn);
             this.splitContainer1.Panel1.Controls.Add(this.otgruzka_btn);
@@ -70,6 +80,12 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button6);
+            this.splitContainer1.Panel2.Controls.Add(this.label4);
+            this.splitContainer1.Panel2.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.loaderBox);
+            this.splitContainer1.Panel2.Controls.Add(this.stageLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Controls.Add(this.StatisticsData);
             this.splitContainer1.Panel2.Controls.Add(this.PriemkaData);
             this.splitContainer1.Panel2.Controls.Add(this.button5);
@@ -85,6 +101,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(1064, 681);
             this.splitContainer1.SplitterDistance = 162;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // modelButton
+            // 
+            this.modelButton.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.modelButton.Location = new System.Drawing.Point(12, 160);
+            this.modelButton.Name = "modelButton";
+            this.modelButton.Size = new System.Drawing.Size(135, 51);
+            this.modelButton.TabIndex = 4;
+            this.modelButton.Text = "Запустить моделирование";
+            this.modelButton.UseVisualStyleBackColor = true;
+            this.modelButton.Click += new System.EventHandler(this.modelButton_Click);
             // 
             // StatisticsButton
             // 
@@ -129,6 +156,64 @@
             this.priemka_btn.Text = "Приемка";
             this.priemka_btn.UseVisualStyleBackColor = true;
             this.priemka_btn.Click += new System.EventHandler(this.priemka_btn_Click);
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.SystemColors.Control;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button6.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.button6.Location = new System.Drawing.Point(108, 123);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(196, 46);
+            this.button6.TabIndex = 19;
+            this.button6.Text = "Запуск";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(25, 72);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(131, 21);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "количество дней";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(162, 70);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(142, 23);
+            this.textBox1.TabIndex = 17;
+            // 
+            // loaderBox
+            // 
+            this.loaderBox.ErrorImage = ((System.Drawing.Image)(resources.GetObject("loaderBox.ErrorImage")));
+            this.loaderBox.InitialImage = ((System.Drawing.Image)(resources.GetObject("loaderBox.InitialImage")));
+            this.loaderBox.Location = new System.Drawing.Point(375, 195);
+            this.loaderBox.Name = "loaderBox";
+            this.loaderBox.Size = new System.Drawing.Size(64, 64);
+            this.loaderBox.TabIndex = 16;
+            this.loaderBox.TabStop = false;
+            // 
+            // stageLabel
+            // 
+            this.stageLabel.AutoSize = true;
+            this.stageLabel.Location = new System.Drawing.Point(516, 12);
+            this.stageLabel.Name = "stageLabel";
+            this.stageLabel.Size = new System.Drawing.Size(12, 15);
+            this.stageLabel.TabIndex = 14;
+            this.stageLabel.Text = "?";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(462, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 15);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Стадия:";
             // 
             // StatisticsData
             // 
@@ -266,6 +351,7 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.loaderBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StatisticsData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriemkaData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OtgruzkaData)).EndInit();
@@ -293,5 +379,12 @@
         private DataGridView PriemkaData;
         private Button StatisticsButton;
         private DataGridView StatisticsData;
+        private Button modelButton;
+        private Label stageLabel;
+        private Label label3;
+        private PictureBox loaderBox;
+        private Label label4;
+        private TextBox textBox1;
+        private Button button6;
     }
 }
